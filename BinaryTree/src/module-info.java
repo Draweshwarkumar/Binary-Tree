@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author LAPPY
+ *
+ */
+module BinaryTree {
+}
