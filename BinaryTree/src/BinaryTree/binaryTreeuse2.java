@@ -145,6 +145,44 @@ public class binaryTreeuse2 {
 		System.out.print(root.data+" ");
 		printInorder(root.right);
 	}
+
+	
+	public static BinaryTreeNode<Integer> BST(BinaryTreeNode<Integer> root,int s){
+		if(root == null) {
+			return null;
+		}
+		if(root.data == s) {
+			return root;
+		}
+		if(s>root.data) {
+			return BST(root.right,s);
+		}
+		else {
+			return BST(root.left,s);
+		}
+	}
+	
+	public static void printInRange(BinaryTreeNode<Integer> root, int first, int second) {
+	    if (root == null) {
+	        return;
+	    }
+
+	    // Traverse the left subtree if there is a possibility of finding values within range
+	    if (first < root.data) {
+	        printInRange(root.left, first, second);
+	    }
+
+	    // Print the current node if it is within the range
+	    if (first <= root.data && second >= root.data) {
+	        System.out.print(root.data + " ");
+	    }
+
+	    // Traverse the right subtree if there is a possibility of finding values within range
+	    if (second > root.data) {
+	        printInRange(root.right, first, second);
+	    }
+	}
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
