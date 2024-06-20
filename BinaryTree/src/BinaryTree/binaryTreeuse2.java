@@ -183,6 +183,41 @@ public class binaryTreeuse2 {
 	    }
 	}
 
+	public static boolean isBst(BinaryTreeNode<Integer>root) {
+		if(root == null) {
+			return true;
+		}
+		int leftMax = maximum(root.left);
+		int rightMin = minimum(root.right);
+		if(root.data <= leftMax) {
+			return false;
+		}
+		if(root.data > rightMin) {
+			return false;
+		}
+		
+		boolean isLeftBST = isBst(root.left);
+		boolean isRightBSt = isBst(root.right);
+		if(isLeftBST && isRightBSt) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static boolean isBst2(BinaryTreeNode<Integer>root,int min,int max) {
+		if(root == null) {
+			return true;
+		}
+		if(root.data < min || root.data > max) {
+			return false;
+		}
+		boolean isleftok = isBst2(root.left,min,root.data-1);
+		boolean isrightok = isBst2(root.right,root.data,max);
+		return isleftok && isrightok;
+		
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
