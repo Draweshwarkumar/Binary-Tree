@@ -218,6 +218,67 @@ public class binaryTreeuse2 {
 		return isleftok && isrightok;
 		
 	}
+
+	public static BinaryTreeNode<Integer> makeBst(int arr[],int si,int ei){
+		if(si > ei) {
+			return null;
+		}
+		int mid = (si + ei)/2;
+		int rootdata = arr[mid];
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootdata);
+		root.left = makeBst(arr, si ,mid-1);
+		root.right = makeBst(arr, mid+1, ei);
+		
+		return root;
+	}
+	
+	private static node<Integer> head = null;
+	private static node<Integer> tail = null;
+	public static node<Integer> sortedLL(BinaryTreeNode<Integer>root){
+		inorderTraversal(root);
+		return head;
+		
+	}
+	private static void inorderTraversal(BinaryTreeNode<Integer>root) {
+		if(root==null) {
+			return;
+		}
+		inorderTraversal(root.left);
+		node<Integer> newnode = new node<>(root.data);
+		if(head == null) {
+			head = newnode;
+			tail = newnode;
+		}
+		else {
+			tail.next = newnode;
+			tail = newnode;
+		}
+		inorderTraversal(root.right);
+	}
+	
+	public static ArrayList<Integer> getRootToNodePath(BinaryTreeNode<Integer>root,int data){
+		if(root ==null) {
+			return null;
+		}
+		if(root.data == data) {
+			ArrayList<Integer> output = new ArrayList<>();
+			output.add(root.data);
+			return output;
+		}
+		ArrayList<Integer> leftoutput = getRootToNodePath(root.left,data);
+		if(leftoutput != null) {
+			leftoutput.add(root.data);
+			return leftoutput;
+		}
+		ArrayList<Integer> rightoutput = getRootToNodePath(root.right,data);
+		if(rightoutput != null) {
+			rightoutput.add(root.data);
+			return rightoutput; 
+		}
+		else {
+			return null;
+		}
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
